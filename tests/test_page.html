@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ol class="list">
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+        <li>Third Third</li>
+        <li>Contain in word</li>
+        <li>Last</li>
+    </ol>
+    <div class="single-element">
+        <span>text of single element</span>
+    </div>
+    <div class="container">
+        <div class="child-item">
+            <span>text of first child item</span>
+        </div>
+    </div>
+    <ul class="list-components">
+        <li class="l-component"><div>first inner</div></li>
+        <li class="l-component"><div>second inner</div></li>
+        <li class="l-component"><div>third inner</div></li>
+    </ul>
+    <ul class="level1">
+        <li>
+            <ul class="level2">
+                <li><span>x11</span></li>
+                <li><span>x12</span></li>
+                <li><span>x13</span></li>
+            </ul>
+        </li>
+        <li>
+            <ul class="level2">
+                <li><span>x21</span></li>
+                <li><span>x22</span></li>
+                <li><span>x23</span></li>
+            </ul>
+        </li>
+        <li>
+            <ul class="level2">
+                <li><span>x31</span></li>
+                <li><span>x32</span></li>
+                <li><span>x33</span></li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="async-list-components">
+    </ul>
+    <script>
+        const container = document.querySelector('#async-list-components');
+        for (let i = 1; i <= 3; i++) {
+            const element = document.createElement('li');
+            element.innerText = `async ${i}`;
+            setTimeout(() => container.appendChild(element), i * 1000);
+        }
+    </script>
+</body>
+</html>
