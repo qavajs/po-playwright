@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/po",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "library for plain-english access page object access",
   "main": "index.js",
   "scripts": {

@@ -9,6 +9,6 @@ declare type PageObject = {
     getElement(path: string): Element | ElementArray
 }
 declare let po: PageObject;
-declare module '@yaatp/po' {
+declare module '@qavajs/po' {
     export { $, $$, po }
 }
