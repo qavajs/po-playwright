@@ -131,6 +131,11 @@ test('get collection from not existing element by text', async () => {
     await expect(shouldThrow).rejects.toThrow();
 });
 
+test('alias is added to returned element', async () => {
+    const element = await po.getElement('Single Element');
+    expect(element.alias).toBe('Single Element');
+});
+
 afterAll(async () => {
     await po.driver.deleteSession();
 })

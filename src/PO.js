@@ -27,6 +27,7 @@ class PO {
             const token = tokens.shift();
             [element, po] = await this.getEl(element, po, token);
         }
+        element.alias = path;
         return element
     }
 
