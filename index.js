@@ -1,5 +1,5 @@
-const po = require('./src/PO');
-const { $, $$ } = require('./src/register');
+const po = require('./lib/PO');
+const { $, $$ } = require('./lib/register');
 
 module.exports = {
     po,

@@ -47,4 +47,4 @@ class App {
     NotExistingComponent = $(new NotExistingComponent());
 }
 
-module.exports = new App();
+export default new App();
