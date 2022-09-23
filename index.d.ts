@@ -9,6 +9,9 @@ declare type PageObject = {
     getElement(path: string): Element | ElementArray
 }
 declare let po: PageObject;
-declare module '@qavajs/po' {
-    export { $, $$, po }
+declare class Component {
+    constructor(selector: string | object)
+}
+declare module '@qavajs/po-playwright' {
+    export { $, $$, po, Component }
 }
