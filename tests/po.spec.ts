@@ -1,5 +1,5 @@
 import { test, beforeAll, afterAll, expect } from '@jest/globals';
-import {Browser, chromium} from 'playwright';
+import { Browser, chromium } from 'playwright';
 import path from 'path';
 import po from '../src/PO';
 import samplePO from './samplePO';

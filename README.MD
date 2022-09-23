@@ -1,14 +1,14 @@
-## @qavajs/po
+## @qavajs/po-playwright
 
 This library provides the ability to create hierarchical page objects and access elements using plain-english selectors.
-Works on top of webdriverIO.
+Works on top of Playwright.
 
-`npm install @qavajs/po`
+`npm install @qavajs/po-playwright`
 ## Usage
 
 Lib provides getElement method that resolves plain-english selector and return webdriverIO element or array of webdriverIO element.
 ```javascript
-const { po } = require('@qavajs/po');
+const { po } = require('@qavajs/po-playwright');
 
 When(/^click '(.+)'$/, async function (alias) {
     const element = await po.getElement(alias);
@@ -30,7 +30,7 @@ An element can be defined in form of webdriverIO selector or as an instance of t
 
 Each not top-level component should have selector element in form of webdriverIO selector.
 ```javascript
-const { $, $$ } = require('@qavajs/po');
+const { $, $$ } = require('@qavajs/po-playwright');
 
 class MultipleComponent {
     selector = '.list-components li';
@@ -56,7 +56,7 @@ Before using po object need to be initiated and hierarchy of elements needs to b
 The best place to do it is cucumber-js Before hook
 
 ```javascript
-const { po } = require('@qavajs/po');
+const { po } = require('@qavajs/po-playwright');
 const pos = require('./app.js');
 Before(async function() {
     po.init(browser, { timeout: 10000 });  // browser is webdriverIO browser object
