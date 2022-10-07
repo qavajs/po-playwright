@@ -6,13 +6,12 @@ Works on top of Playwright.
 `npm install @qavajs/po-playwright`
 ## Usage
 
-Lib provides getElement method that resolves plain-english selector and return webdriverIO element or array of webdriverIO element.
+Lib provides getElement method that resolves plain-english selector and return playwright locator.
 ```javascript
 const { po } = require('@qavajs/po-playwright');
 
 When(/^click '(.+)'$/, async function (alias) {
     const element = await po.getElement(alias);
-    await element.waitForClickable();
     await element.click();
 });
 ```
@@ -59,7 +58,7 @@ The best place to do it is cucumber-js Before hook
 const { po } = require('@qavajs/po-playwright');
 const pos = require('./app.js');
 Before(async function() {
-    po.init(browser, { timeout: 10000 });  // browser is webdriverIO browser object
+    po.init(page, { timeout: 10000 });  // page is an instance of playwright page
     po.register(pos); // pos is page object hierarchy
 });
 ```
