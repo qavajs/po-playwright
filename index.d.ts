@@ -1,12 +1,10 @@
-import * as WebdriverIO from 'webdriverio';
-export declare type Element = WebdriverIO.Element<'async'>;
-export declare type ElementArray = WebdriverIO.ElementArray;
+import { Locator } from 'playwright';
 declare function $(selector: string|Object): Object;
 declare function $$(selector: string|Object): Object;
 declare type PageObject = {
     init(driver, options: { timeout: number }): void;
     register(pageObject: Object): void;
-    getElement(path: string): Element | ElementArray
+    getElement(path: string): Locator
 }
 declare let po: PageObject;
 declare class Component {
