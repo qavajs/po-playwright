@@ -34,6 +34,7 @@ class PO {
         const tokens: Array<Token> = parseTokens(alias);
         let element: Locatable = this.driver;
         let po: PO | PageObject = this;
+        await this.driver.waitForLoadState();
         while (tokens.length > 0) {
             const token = tokens.shift() as Token;
             await this.checkExistence(element, token);
