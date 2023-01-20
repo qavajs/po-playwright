@@ -1,6 +1,6 @@
 import parseTokens, { Token } from './parseTokens';
-import {Page, Locator, Browser} from 'playwright';
-import {Definition} from "./register";
+import { Page, Locator } from 'playwright';
+import { Definition } from "./register";
 const TICK_INTERVAL = 500;
 
 interface PageObject {
@@ -61,11 +61,11 @@ class PO {
      * @returns
      */
     private async getEl(element: Page | Locator, po: Object, token: Token): Promise<[Locator, Object] | undefined> {
-        const currentElement = await element;
         const elementName: string = token.elementName.replace(/\s/g, '');
         // @ts-ignore
         const newPo: Definition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
+        const currentElement = (newPo.ignoreHierarchy ? await this.driver : await element) as Locatable;
         if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
         if (newPo.isCollection && token.suffix === 'in') return [
             await this.getElementByText(currentElement, newPo, token),

@@ -3,6 +3,7 @@ import { Browser, chromium } from 'playwright';
 import path from 'path';
 import po from '../src/PO';
 import samplePO from './samplePO';
+import { $ } from '../src/register';
 
 let browser: Browser;
 beforeAll(async () => {
@@ -129,6 +130,22 @@ test('get collection from not existing element by text', async () => {
 test('alias is added to returned element', async () => {
     const element = await po.getElement('Single Element');
     expect(element.alias).toBe('Single Element');
+});
+
+test('ignore hierarchy flag', async () => {
+    const element = await po.getElement('Single Component > Ignore Hierarchy Item');
+    expect(await element.innerText()).toBe('first inner');
+});
+
+test('get not existing element', async () => {
+    const shouldThrow = async () => await po.getElement('Not Existing Element');
+    await expect(shouldThrow).rejects.toThrow('Not Existing Element is not found');
+});
+
+test('throw error if params are not passed into register function', () => {
+    // @ts-ignore
+    const shouldThrow = () => $();
+    expect(shouldThrow).toThrow('Selector or component should be passed!');
 });
 
 afterAll(async () => {

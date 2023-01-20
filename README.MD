@@ -62,3 +62,15 @@ Before(async function() {
     po.register(pos); // pos is page object hierarchy
 });
 ```
+
+## Ignore hierarchy
+In case if child element and parent component doesn't have hierarchy dependency
+it's possible to pass extra parameter _ignoreHierarchy_ parameter to start traverse from root
+
+```javascript
+class ComponentThatDescribesNotWellDesignedDOMTree {
+    selector = '.container';
+    //ignoreHierarchy will ignore component selector .container and start traverse from root
+    ChildItem = $('.child-item', { ignoreHierarchy: true }); 
+}
+```
