@@ -1,7 +1,7 @@
 /**
  * Utility class that simplifies page object creation
  */
-class Component {
+export class Component {
 
     selector: string | object;
     /**
@@ -12,5 +12,3 @@ class Component {
     }
 
 }
-
-export default Component;

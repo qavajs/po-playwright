@@ -1,5 +1,5 @@
 import { $, $$ } from '../src/register';
-import Component from '../src/Component';
+import { Component } from '../src/Component';
 
 class MultipleComponent extends Component {
     ChildItem = $('div');
