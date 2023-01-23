@@ -1,8 +1,7 @@
-const { $, $$ } = require('../src/register');
+import { $, $$ } from '../src/register';
+import Component from '../src/Component';
 
-class MultipleComponent {
-    selector = '.list-components li';
-
+class MultipleComponent extends Component {
     ChildItem = $('div');
 }
 
@@ -10,6 +9,7 @@ class SingleComponent {
     selector = '.container';
 
     ChildItem = $('.child-item');
+    IgnoreHierarchyItem = $('.list-components > li:first-child', { ignoreHierarchy: true });
 }
 
 class AsyncComponent {
@@ -41,7 +41,7 @@ class App {
     SingleElement = $('.single-element');
     List = $$('.list li');
     SingleComponent = $(new SingleComponent());
-    MultipleComponents = $$(new MultipleComponent());
+    MultipleComponents = $$(new MultipleComponent('.list-components li'));
     AsyncComponent = $(new AsyncComponent());
     Level1Elements = $(new Level1Elements());
     NotExistingComponent = $(new NotExistingComponent());

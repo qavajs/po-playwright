@@ -1,32 +1,43 @@
+export interface DefinitionOptions {
+    ignoreHierarchy: boolean
+}
 export interface Definition {
     selector: string;
     isCollection: boolean;
+    ignoreHierarchy: boolean
 }
 
 /**
  * register element in page object
  * @param {string|object} definition
  * @param {boolean} isCollection
- * @returns { definition, isCollection }
+ * @param {DefinitionOptions} options
+ * @returns {{ definition, isCollection, ignoreHierarchy }}
  */
-export function register(definition: string | Object, isCollection: boolean): Definition {
-    if (!definition) throw new Error('selector or component should be passed');
+export function register(
+    definition: string | Object,
+    isCollection: boolean,
+    options: DefinitionOptions = { ignoreHierarchy: false }): Definition
+{
+    if (!definition) throw new Error('Selector or component should be passed!');
     if (typeof definition === 'object') {
         return {
             ...definition,
-            isCollection
+            isCollection,
+            ...options
         } as Definition
     }
     return {
         selector: definition,
-        isCollection
+        isCollection,
+        ...options
     }
 }
 
-export function $(definition: string | Object): Definition {
-    return register(definition, false)
+export function $(definition: string | Object, options?: DefinitionOptions): Definition {
+    return register(definition, false, options)
 }
 
-export function $$(definition: string | Object): Definition {
-    return register(definition, true)
+export function $$(definition: string | Object, options?: DefinitionOptions): Definition {
+    return register(definition, true, options)
 }
