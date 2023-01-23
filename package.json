@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/po-playwright",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "library for plain-english access to page object",
   "main": "index.js",
   "scripts": {

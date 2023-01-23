@@ -17,7 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "pretty": true,
