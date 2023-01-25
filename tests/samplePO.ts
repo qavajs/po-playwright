@@ -37,6 +37,11 @@ class NotExistingComponent {
     Items = $$('li > span');
 }
 
+class ComponentWithoutSelector {
+    SingleElement = $('.single-element');
+    List = $$('.list li');
+}
+
 class App {
     SingleElement = $('.single-element');
     List = $$('.list li');
@@ -45,6 +50,8 @@ class App {
     AsyncComponent = $(new AsyncComponent());
     Level1Elements = $(new Level1Elements());
     NotExistingComponent = $(new NotExistingComponent());
+    ComponentWithoutSelector = $(new ComponentWithoutSelector());
+    ComponentsWithoutSelector = $$(new ComponentWithoutSelector());
 }
 
 export default new App();

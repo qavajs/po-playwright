@@ -148,6 +148,22 @@ test('throw error if params are not passed into register function', () => {
     expect(shouldThrow).toThrow('Selector or component should be passed!');
 });
 
+test('get element from component without selector', async () => {
+    const element = await po.getElement('Component Without Selector > Single Element');
+    const text = await element.innerText();
+    expect(text).toEqual('text of single element');
+});
+
+test('get element from collection from component without selector', async () => {
+    const element = await po.getElement('Component Without Selector > #2 of List');
+    expect(await element.innerText()).toEqual('Second');
+});
+
+test('throw an error if component without selector registered as collection', async () => {
+    const shouldThrow = async () => await po.getElement('#1 of Components Without Selector > #2 of List');
+    await expect(shouldThrow).rejects.toThrow('Unsupported operation. Components Without Selector selector property is required as it is collection');
+});
+
 afterAll(async () => {
     await browser.close();
 })

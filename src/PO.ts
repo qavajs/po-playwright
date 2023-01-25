@@ -60,13 +60,16 @@ class PO {
      * @param {Token} token
      * @returns
      */
-    private async getEl(element: Page | Locator, po: Object, token: Token): Promise<[Locator, Object] | undefined> {
+    private async getEl(element: Page | Locator, po: Object, token: Token): Promise<[Locatable, Object] | undefined> {
         const elementName: string = token.elementName.replace(/\s/g, '');
         // @ts-ignore
         const newPo: Definition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
         const currentElement = (newPo.ignoreHierarchy ? await this.driver : await element) as Locatable;
         if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
+        if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation. ${token.elementName} selector property is required as it is collection`);
+        if (!newPo.selector) return [currentElement, newPo];
+
         if (newPo.isCollection && token.suffix === 'in') return [
             await this.getElementByText(currentElement, newPo, token),
             newPo
