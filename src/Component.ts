@@ -3,11 +3,11 @@
  */
 export class Component {
 
-    selector: string | object;
+    selector?: string | object;
     /**
      * @param {object | string} selector - component selector
      */
-    constructor(selector: object | string) {
+    constructor(selector?: object | string) {
         this.selector = selector;
     }
 

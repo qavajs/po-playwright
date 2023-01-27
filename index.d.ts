@@ -8,7 +8,7 @@ declare type PageObject = {
 }
 declare let po: PageObject;
 declare class Component {
-    constructor(selector: string | object)
+    constructor(selector?: string | object)
 }
 declare module '@qavajs/po-playwright' {
     export { $, $$, po, Component }

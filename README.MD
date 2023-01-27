@@ -74,3 +74,18 @@ class ComponentThatDescribesNotWellDesignedDOMTree {
     ChildItem = $('.child-item', { ignoreHierarchy: true }); 
 }
 ```
+
+## Optional selector property
+If selector property is not provided for Component then parent element will be returned
+
+```javascript
+class ParentComponent {
+    selector = '.container';
+    ChildComponent = $(new ChildComponent()); 
+}
+
+class ChildComponent {
+    //Element will be searched in parent .container element
+    Element = $('.someElement');
+}
+```
