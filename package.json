@@ -7,7 +7,10 @@
     "test": "jest --coverage --detectOpenHandles",
     "build": "tsc"
   },
-  "author": "Alexander Galichenko",
+  "authors": [
+    "Alexander Galichenko",
+    "Alexandr Legchilov"
+    ],
   "license": "MIT",
   "devDependencies": {
     "jest": "^29.4.0",
