@@ -1,7 +1,6 @@
 import parseTokens, { Token } from './parseTokens';
 import { Page, Locator } from 'playwright';
 import { Definition } from "./register";
-const TICK_INTERVAL = 500;
 
 interface PageObject {
     selector?: string;
@@ -95,6 +94,9 @@ class PO {
         }
         if (token.prefix === '@') {
             return element.locator(po.selector, { hasText: new RegExp(`^${tokenValue}$`) }).nth(0);
+        }
+        if (token.prefix === '/') {
+            return element.locator(po.selector, { hasText: new RegExp(tokenValue) }).nth(0);
         }
         throw new Error(`${token.prefix} is not supported`)
     }
