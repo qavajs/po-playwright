@@ -1,4 +1,7 @@
 ## 0.0.7
+- :rocket: added text selector by regexp
+
+## 0.0.7
 - :rocket: made selector property as optional
  
 ## 0.0.6

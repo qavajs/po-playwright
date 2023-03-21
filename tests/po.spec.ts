@@ -1,6 +1,6 @@
 import { test, beforeAll, afterAll, expect } from '@jest/globals';
 import { Browser, chromium } from 'playwright';
-import path from 'path';
+import { resolve } from 'path';
 import po from '../src/PO';
 import samplePO from './samplePO';
 import { $ } from '../src/register';
@@ -13,7 +13,7 @@ beforeAll(async () => {
 
     po.init(driver, { timeout: 5000 });
     po.register(samplePO);
-    const fileName = path.resolve('./tests/test_page.html');
+    const fileName = resolve('./tests/test_page.html');
     await driver.goto('file://' + fileName);
 });
 
@@ -39,6 +39,11 @@ test('get element from collection by partial text', async () => {
 
 test('get element from collection by exact text', async () => {
     const element = await po.getElement('@Third in List');
+    expect(await element.innerText()).toBe('Third');
+});
+
+test('get element from collection by regexp text', async () => {
+    const element = await po.getElement('/Thi/ in List');
     expect(await element.innerText()).toBe('Third');
 });
 
