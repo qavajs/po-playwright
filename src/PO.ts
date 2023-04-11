@@ -1,6 +1,6 @@
 import parseTokens, { Token } from './parseTokens';
 import { Page, Locator } from 'playwright';
-import { Definition } from "./register";
+import { Definition } from './register';
 
 interface PageObject {
     selector?: string;
@@ -36,7 +36,6 @@ class PO {
         await this.driver.waitForLoadState();
         while (tokens.length > 0) {
             const token = tokens.shift() as Token;
-            await this.checkExistence(element, token);
             [element, po] = await this.getEl(element, po, token);
         }
         const extendedElement = element as ExtendedLocator;
@@ -121,21 +120,6 @@ class PO {
      */
     private async getSingleElement(element: Locatable, selector: string) {
         return element.locator(selector);
-    }
-
-    /**
-     * Check if corresponding handle exists
-     * @private
-     * @param {Locatable} element - locator to check
-     * @param {Token} token - current token
-     */
-    private async checkExistence(element: Locatable, token: Token): Promise<void> {
-        if (element === this.driver) return;
-        try {
-            await (element as Locator).nth(0).elementHandle({ timeout: this.config.timeout });
-        } catch (err) {
-            throw new Error(`${token.elementName} is not present`);
-        }
     }
 
 }
