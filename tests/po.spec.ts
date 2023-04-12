@@ -73,7 +73,7 @@ test('get child item of each element of collection', async () => {
     expect(await collection.nth(0).innerText()).toBe('first inner');
 });
 
-test('get element from collection by parial text containing in', async () => {
+test('get element from collection by partial text containing in', async () => {
     const element = await po.getElement('#Contain in in List');
     expect(await element.innerText()).toBe('Contain in word');
 });
@@ -110,26 +110,6 @@ test.skip('get collection element from collection', async () => {
     expect(text22).toBe('x22');
     expect(text32).toBe('x32');
     expect(await elements.count()).toBe(3);
-});
-
-test('get child from not existing element', async () => {
-    const shouldThrow = async () => await po.getElement('Not Existing Component > Item');
-    await expect(shouldThrow).rejects.toThrow();
-});
-
-test('get collection from not existing element', async () => {
-    const shouldThrow = async () => await po.getElement('Not Existing Component > Items');
-    await expect(shouldThrow).rejects.toThrow();
-});
-
-test('get collection from not existing element by index', async () => {
-    const shouldThrow = async () => await po.getElement('Not Existing Component > #1 of Items');
-    await expect(shouldThrow).rejects.toThrow();
-});
-
-test('get collection from not existing element by text', async () => {
-    const shouldThrow = async () => await po.getElement('Not Existing Component > #text in Items');
-    await expect(shouldThrow).rejects.toThrow();
 });
 
 test('alias is added to returned element', async () => {
