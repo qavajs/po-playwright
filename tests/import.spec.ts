@@ -1,4 +1,4 @@
-import {test, expect} from '@jest/globals';
+import {test, expect} from 'vitest';
 import {po, $, $$, Component} from '../index';
 
 test('po', () => {
