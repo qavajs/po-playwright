@@ -1,4 +1,4 @@
-import { test, expect } from '@jest/globals';
+import { test, expect } from 'vitest';
 import { Component } from '../src/Component';
 test('extend class', () => {
     class CustomComponent extends Component {}

@@ -1,4 +1,4 @@
-import { test, beforeAll, afterAll, expect } from '@jest/globals';
+import { test, beforeAll, afterAll, expect } from 'vitest';
 import { Browser, chromium } from 'playwright';
 import { resolve } from 'path';
 import po from '../src/PO';

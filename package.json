@@ -4,18 +4,18 @@
   "description": "library for plain-english access to page object",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "vitest --coverage run",
     "build": "tsc"
   },
   "authors": [
     "Alexander Galichenko",
     "Alexandr Legchilov"
-    ],
+  ],
   "license": "MIT",
   "devDependencies": {
-    "jest": "^29.5.0",
-    "playwright": "^1.32.3",
-    "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "@vitest/coverage-c8": "^0.31.1",
+    "playwright": "^1.34.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1"
   }
 }
