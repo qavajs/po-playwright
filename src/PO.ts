@@ -76,7 +76,7 @@ class PO {
             await this.getElementByIndex(currentElement, newPo, token),
             newPo
         ];
-        return [await this.getSingleElement(currentElement, newPo.selector), newPo]
+        return [await this.getSingleElement(currentElement, newPo.selector, token.param), newPo]
     }
 
     /**
@@ -89,13 +89,13 @@ class PO {
     private async getElementByText(element: Locatable, po: Definition, token: Token): Promise<Locator> {
         const tokenValue = token.value as string;
         if (token.prefix === '#') {
-            return element.locator(po.selector, { hasText: tokenValue }).nth(0);
+            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: tokenValue }).nth(0);
         }
         if (token.prefix === '@') {
-            return element.locator(po.selector, { hasText: new RegExp(`^${tokenValue}$`) }).nth(0);
+            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: new RegExp(`^${tokenValue}$`) }).nth(0);
         }
         if (token.prefix === '/') {
-            return element.locator(po.selector, { hasText: new RegExp(tokenValue) }).nth(0);
+            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: new RegExp(tokenValue) }).nth(0);
         }
         throw new Error(`${token.prefix} is not supported`)
     }
@@ -109,18 +109,24 @@ class PO {
      */
     private async getElementByIndex(element: Locatable, po: Definition, token: Token): Promise<Locator> {
         const index = parseInt(token.value as string) - 1;
-        return element.locator(po.selector).nth(index);
+        return element.locator(this.resolveSelector(po.selector, token.param)).nth(index);
     }
 
     /**
      * @private
      * @param {Locatable} element - element to get
      * @param {string} selector - selector
+     * @param {string[]} param - params for dynamic selector
      * @returns
      */
-    private async getSingleElement(element: Locatable, selector: string) {
-        return element.locator(selector);
+    private async getSingleElement(element: Locatable, selector: string, param?: string[]) {
+        return element.locator(this.resolveSelector(selector, param));
     }
+
+    private resolveSelector(selector: any, param?: string[]) {
+        return selector.isSelectorFunction ? selector.selectorFunction(...param as string[]) : selector
+    }
+
 
 }
 
