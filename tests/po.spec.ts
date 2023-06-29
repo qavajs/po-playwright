@@ -149,6 +149,21 @@ test('throw an error if component without selector registered as collection', as
     await expect(shouldThrow).rejects.toThrow('Unsupported operation. Components Without Selector selector property is required as it is collection');
 });
 
+test('get element by parametrised selector', async () => {
+    const element = await po.getElement('Async Component > Child Item By Index (2)');
+    expect(await element.innerText()).toEqual('async 2');
+});
+
+test('get component by parametrised selector', async () => {
+    const element = await po.getElement('Async Component By Selector (#async-list-components) > #2 of Child Items');
+    expect(await element.innerText()).toEqual('async 2');
+});
+
+test('get collection by parametrised selector', async () => {
+    const element = await po.getElement('Parametrized List (odd)');
+    expect(await element.count()).toEqual(3);
+});
+
 afterAll(async () => {
     await browser.close();
 })

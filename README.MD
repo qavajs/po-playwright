@@ -4,6 +4,7 @@ This library provides the ability to create hierarchical page objects and access
 Works on top of Playwright.
 
 `npm install @qavajs/po-playwright`
+
 ## Usage
 
 Lib provides getElement method that resolves plain-english selector and return playwright locator.
@@ -88,4 +89,22 @@ class ChildComponent {
     //Element will be searched in parent .container element
     Element = $('.someElement');
 }
+```
+
+## Dynamic selectors
+In case you need to generate selector based on some data you can use dynamic selectors
+
+```javascript
+const { Selector } = require('@qavajs/po-playwright');
+
+class Component {
+    selector = '.container';
+    Element = $(Selector((index => `div:nth-child(${index})`))); // function should return valid selector 
+}
+```
+
+Then you can pass parameter to this function from Gherkin file
+
+```gherkin
+When I click 'Component > Element (2)'
 ```

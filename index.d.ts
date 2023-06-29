@@ -8,8 +8,9 @@ declare type PageObject = {
 }
 declare let po: PageObject;
 declare class Component {
-    constructor(selector?: string | object)
+    constructor(selector?: any)
 }
+declare function Selector(selectorFunction: Function): any
 declare module '@qavajs/po-playwright' {
-    export { $, $$, po, Component }
+    export { $, $$, po, Component, Selector }
 }

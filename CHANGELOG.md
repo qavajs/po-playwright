@@ -1,3 +1,6 @@
+## [0.10.0]
+- :rocket: added capability to dynamically generate selectors
+
 ## [0.0.9]
 - :beetle: removed check existence method
 
