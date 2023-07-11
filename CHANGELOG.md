@@ -1,3 +1,6 @@
+## [0.11.0]
+- :rocket: added capability to provide logger
+
 ## [0.10.0]
 - :rocket: added capability to dynamically generate selectors
 
