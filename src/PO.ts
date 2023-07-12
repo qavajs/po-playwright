@@ -12,14 +12,24 @@ interface ExtendedLocator extends Locator {
 
 type Locatable = Page | Locator;
 
+interface Logger {
+    log(value?: string): void;
+}
+
+const defaultLogger: Logger = {
+    log() {}
+};
+
 class PO {
 
     private driver: Page | null = null;
     private config: { timeout?: number } = {};
+    private logger: Logger = defaultLogger;
 
-    public init(driver: Page, options = { timeout: 2000 }) {
+    public init(driver: Page, options: { timeout: number, logger?: Logger } = { timeout: 2000 }) {
         this.driver = driver;
         this.config.timeout = options.timeout;
+        this.logger = options.logger ?? defaultLogger;
     }
 
     /**
@@ -63,6 +73,7 @@ class PO {
         // @ts-ignore
         const newPo: Definition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
+        this.logger.log(`${elementName} -> ${newPo.selector}`);
         const currentElement = (newPo.ignoreHierarchy ? await this.driver : await element) as Locatable;
         if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
         if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation. ${token.elementName} selector property is required as it is collection`);
