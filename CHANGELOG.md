@@ -1,3 +1,6 @@
+## [0.11.1]
+- :beetle: made call of `this.driver.waitForLoadState` optional (to enable electron support)
+
 ## [0.11.0]
 - :rocket: added capability to provide logger
 
