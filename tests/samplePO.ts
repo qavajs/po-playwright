@@ -15,7 +15,7 @@ class SingleComponent {
 
 class AsyncComponent extends Component {
     ChildItems = $$('li');
-    ChildItemByIndex = $(Selector(index => `li:nth-child(${index})`))
+    ChildItemByIndex = $(Selector((index: string) => `li:nth-child(${index})`))
 }
 
 class Level2Elements {
@@ -45,11 +45,11 @@ class ComponentWithoutSelector {
 class App {
     SingleElement = $('.single-element');
     List = $$('.list li');
-    ParametrizedList = $$(Selector(index => `.list li:nth-child(${index})`));
+    ParametrizedList = $$(Selector((index: string) => `.list li:nth-child(${index})`));
     SingleComponent = $(new SingleComponent());
     MultipleComponents = $$(new MultipleComponent('.list-components li'));
     AsyncComponent = $(new AsyncComponent('#async-list-components'));
-    AsyncComponentBySelector = $(new AsyncComponent(Selector(selector => selector)));
+    AsyncComponentBySelector = $(new AsyncComponent(Selector((selector: any) => selector)));
     Level1Elements = $(new Level1Elements());
     NotExistingComponent = $(new NotExistingComponent());
     ComponentWithoutSelector = $(new ComponentWithoutSelector());

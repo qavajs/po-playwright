@@ -43,7 +43,9 @@ class PO {
         const tokens: Array<Token> = parseTokens(alias);
         let element: Locatable = this.driver;
         let po: PO | PageObject = this;
-        await this.driver.waitForLoadState();
+        if (this.driver.waitForLoadState) {
+            await this.driver.waitForLoadState();
+        }
         while (tokens.length > 0) {
             const token = tokens.shift() as Token;
             [element, po] = await this.getEl(element, po, token);
