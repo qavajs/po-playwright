@@ -1,3 +1,6 @@
+## [0.11.2]
+- :beetle: added logger option to po.init
+
 ## [0.11.1]
 - :beetle: made call of `this.driver.waitForLoadState` optional (to enable electron support)
 
