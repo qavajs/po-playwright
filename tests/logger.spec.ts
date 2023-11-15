@@ -7,9 +7,9 @@ import samplePO from './samplePO';
 let browser: Browser;
 
 describe('logger', () => {
-	const logger = {
+	const logger: { logs: string[], log: (value: string) => void, clean: () => void } = {
 		logs: [],
-		log(value) {
+		log(value: string) {
 			this.logs.push(value);
 		},
 		clean() {
