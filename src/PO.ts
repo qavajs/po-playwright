@@ -11,6 +11,7 @@ interface ExtendedLocator extends Locator {
 }
 
 type Locatable = Page | Locator;
+type PoDefinition = Definition & {resolvedSelector: any}
 
 interface Logger {
     log(value?: string): void;
@@ -70,17 +71,16 @@ class PO {
      * @param {Token} token
      * @returns
      */
-    private async getEl(element: Page | Locator, po: Object, token: Token): Promise<[Locatable, Object] | undefined> {
+    private async getEl(element: Page | Locator, po: {[prop: string]: any}, token: Token): Promise<[Locatable, Object] | undefined> {
         const elementName: string = token.elementName.replace(/\s/g, '');
-        // @ts-ignore
-        const newPo: Definition = po[elementName];
+        const newPo: PoDefinition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
-        this.logger.log(`${elementName} -> ${newPo.selector}`);
         const currentElement = (newPo.ignoreHierarchy ? await this.driver : await element) as Locatable;
         if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
         if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation. ${token.elementName} selector property is required as it is collection`);
         if (!newPo.selector) return [currentElement, newPo];
-
+        newPo.resolvedSelector = this.resolveSelector(newPo.selector, token.param);
+        this.logger.log(`${elementName} -> ${newPo.resolvedSelector}`);
         if (newPo.isCollection && token.suffix === 'in') return [
             await this.getElementByText(currentElement, newPo, token),
             newPo
@@ -89,26 +89,26 @@ class PO {
             await this.getElementByIndex(currentElement, newPo, token),
             newPo
         ];
-        return [await this.getSingleElement(currentElement, newPo.selector, token.param), newPo]
+        return [await this.getSingleElement(currentElement, newPo.resolvedSelector), newPo]
     }
 
     /**
      * @private
      * @param {Locatable} element - element to get
-     * @param {Definition} po - page object
+     * @param {PoDefinition} po - page object
      * @param {Token} token - token
      * @returns
      */
-    private async getElementByText(element: Locatable, po: Definition, token: Token): Promise<Locator> {
+    private async getElementByText(element: Locatable, po: PoDefinition, token: Token): Promise<Locator> {
         const tokenValue = token.value as string;
         if (token.prefix === '#') {
-            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: tokenValue }).nth(0);
+            return element.locator(po.resolvedSelector, { hasText: tokenValue }).nth(0);
         }
         if (token.prefix === '@') {
-            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: new RegExp(`^${tokenValue}$`) }).nth(0);
+            return element.locator(po.resolvedSelector, { hasText: new RegExp(`^${tokenValue}$`) }).nth(0);
         }
         if (token.prefix === '/') {
-            return element.locator(this.resolveSelector(po.selector, token.param), { hasText: new RegExp(tokenValue) }).nth(0);
+            return element.locator(po.resolvedSelector, { hasText: new RegExp(tokenValue) }).nth(0);
         }
         throw new Error(`${token.prefix} is not supported`)
     }
@@ -116,13 +116,13 @@ class PO {
     /**
      * @private
      * @param {Locatable} element - element to get
-     * @param {Definition} po - page object
+     * @param {PoDefinition} po - page object
      * @param {Token} token - token
      * @returns
      */
-    private async getElementByIndex(element: Locatable, po: Definition, token: Token): Promise<Locator> {
+    private async getElementByIndex(element: Locatable, po: PoDefinition, token: Token): Promise<Locator> {
         const index = parseInt(token.value as string) - 1;
-        return element.locator(this.resolveSelector(po.selector, token.param)).nth(index);
+        return element.locator(po.resolvedSelector).nth(index);
     }
 
     /**
@@ -132,14 +132,13 @@ class PO {
      * @param {string[]} param - params for dynamic selector
      * @returns
      */
-    private async getSingleElement(element: Locatable, selector: string, param?: string[]) {
-        return element.locator(this.resolveSelector(selector, param));
+    private async getSingleElement(element: Locatable, selector: string) {
+        return element.locator(selector);
     }
 
     private resolveSelector(selector: any, param?: string[]) {
         return selector.isSelectorFunction ? selector.selectorFunction(...param as string[]) : selector
     }
-
 
 }
 

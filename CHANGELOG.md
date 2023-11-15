@@ -1,3 +1,6 @@
+## [0.11.3]
+- :beetle: fixed logging Selector functions
+
 ## [0.11.2]
 - :beetle: added logger option to po.init
 
