@@ -4,7 +4,11 @@ export interface DefinitionOptions {
 export interface Definition {
     selector: any;
     isCollection: boolean;
-    ignoreHierarchy: boolean
+    ignoreHierarchy: boolean;
+    isSelectorFunction?: boolean;
+    isNativeSelector?: boolean;
+    selectorFunction?: Function;
+    resolvedSelector?: any;
 }
 
 /**

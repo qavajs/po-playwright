@@ -1,5 +1,5 @@
 import {test, expect} from 'vitest';
-import {po, $, $$, Component} from '../index';
+import {po, $, $$, Component, Selector, NativeSelector} from '../index';
 
 test('po', () => {
     expect(po.init).toBeInstanceOf(Function);
@@ -16,4 +16,12 @@ test('$$', () => {
 
 test('Component', () => {
     expect(Component).toBeInstanceOf(Function);
+});
+
+test('Selector', () => {
+    expect(Selector).toBeInstanceOf(Function);
+});
+
+test('NativeSelector', () => {
+    expect(NativeSelector).toBeInstanceOf(Function);
 });

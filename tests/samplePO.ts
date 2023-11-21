@@ -1,6 +1,6 @@
 import { $, $$ } from '../src/register';
 import { Component } from '../src/Component';
-import { Selector } from '../src/Selector';
+import { Selector, NativeSelector } from '../src/Selector';
 
 class MultipleComponent extends Component {
     ChildItem = $('div');
@@ -54,6 +54,8 @@ class App {
     NotExistingComponent = $(new NotExistingComponent());
     ComponentWithoutSelector = $(new ComponentWithoutSelector());
     ComponentsWithoutSelector = $$(new ComponentWithoutSelector());
+    NativeSelectorSingleElement = $(NativeSelector(page => page.locator('.single-element')));
+    NativeSelectorList = $$(NativeSelector(page => page.locator('.list li')));
 }
 
 export default new App();

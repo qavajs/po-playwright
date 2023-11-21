@@ -1,12 +1,13 @@
 const po = require('./lib/PO').default;
 const { $, $$ } = require('./lib/register');
 const { Component } = require('./lib/Component');
-const { Selector } = require('./lib/Selector');
+const { Selector, NativeSelector } = require('./lib/Selector');
 
 module.exports = {
     po,
     $,
     $$,
     Component,
-    Selector
+    Selector,
+    NativeSelector
 }

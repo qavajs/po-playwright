@@ -164,6 +164,16 @@ test('get collection by parametrised selector', async () => {
     expect(await element.count()).toEqual(3);
 });
 
+test('get native single element', async () => {
+    const element = await po.getElement('Native Selector Single Element');
+    expect(await element.innerText()).toBe('text of single element');
+});
+
+test('get native collection', async () => {
+    const collection = await po.getElement('Native Selector List');
+    expect(await collection.count()).toBe(6);
+});
+
 afterAll(async () => {
     await browser.close();
-})
+});
