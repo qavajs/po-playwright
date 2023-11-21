@@ -1,3 +1,13 @@
+## [0.12.0]
+- :rocket: added capability to use driver-built selector
+```javascript
+const { NativeSelector } = require('@qavajs/po-playwright');
+
+class App {
+    Element = $(NativeSelector(page => page.getByText(`some text`)));
+}
+```
+
 ## [0.11.3]
 - :beetle: fixed logging Selector functions
 

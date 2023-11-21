@@ -14,6 +14,7 @@ declare class Component {
     constructor(selector?: any)
 }
 declare function Selector(selectorFunction: Function): any
+declare function NativeSelector(selectorFunction: Function): any
 declare module '@qavajs/po-playwright' {
-    export { $, $$, po, Component, Selector }
+    export { $, $$, po, Component, Selector, NativeSelector }
 }

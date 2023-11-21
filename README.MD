@@ -108,3 +108,16 @@ Then you can pass parameter to this function from Gherkin file
 ```gherkin
 When I click 'Component > Element (2)'
 ```
+
+## Native framework selectors
+It is also possible to use driver-built capabilities to return element. You can pass handler that has access to
+current `page` object. 
+
+```javascript
+const { NativeSelector } = require('@qavajs/po-playwright');
+
+class Component {
+    selector = '.container';
+    Element = $(NativeSelector(page => page.getByText(`some text`))); 
+}
+```
