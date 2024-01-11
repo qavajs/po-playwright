@@ -1,3 +1,6 @@
+## [0.13.0]
+- :x: disabled auto-split arguments in selector function
+
 ## [0.12.0]
 - :rocket: added capability to use driver-built selector
 ```javascript
