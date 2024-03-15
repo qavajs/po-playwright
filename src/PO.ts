@@ -75,7 +75,7 @@ class PO {
         const newPo: Definition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
         const currentElement = (newPo.ignoreHierarchy ? this.driver : element) as Locatable;
-        if (newPo.isNativeSelector) return [await (newPo.selectorFunction as Function)(this.driver), newPo];
+        if (newPo.isNativeSelector) return [await (newPo.selectorFunction as Function)(this.driver, currentElement), newPo];
         if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
         if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation. ${token.elementName} selector property is required as it is collection`);
         if (!newPo.selector) return [currentElement, newPo];
