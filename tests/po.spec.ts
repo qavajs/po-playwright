@@ -174,6 +174,11 @@ test('get native collection', async () => {
     expect(await collection.count()).toBe(6);
 });
 
+test('native element from parent', async () => {
+    const element = await po.getElement('Iframe Container > Iframe Element');
+    expect(await element.innerText()).toBe('I am in iframe');
+});
+
 afterAll(async () => {
     await browser.close();
 });

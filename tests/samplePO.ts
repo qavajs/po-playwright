@@ -42,6 +42,14 @@ class ComponentWithoutSelector {
     List = $$('.list li');
 }
 
+class IframeContainer extends Component {
+    IframeElement = $(NativeSelector(
+        (_, parent) => parent
+            .frameLocator('#iframe')
+            .locator('#iframeElement')
+    ));
+}
+
 class App {
     SingleElement = $('.single-element');
     List = $$('.list li');
@@ -56,6 +64,7 @@ class App {
     ComponentsWithoutSelector = $$(new ComponentWithoutSelector());
     NativeSelectorSingleElement = $(NativeSelector(page => page.locator('.single-element')));
     NativeSelectorList = $$(NativeSelector(page => page.locator('.list li')));
+    IframeContainer = $(new IframeContainer('#iframeContainer'));
 }
 
 export default new App();

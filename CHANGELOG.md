@@ -1,3 +1,23 @@
+# Change Log
+
+All notable changes to the "@qavajs/po-playwright" will be documented in this file.
+
+Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+
+:rocket: - new feature
+:beetle: - bugfix
+:x: - deprecation
+
+## [0.14.0]
+- :rocket: added capability to pass parent element to NativeSelector
+```javascript
+  const { NativeSelector } = require('@qavajs/po-playwright');
+
+  class App {
+    Element = $(NativeSelector(((page, parent) => parent.getByText(`some text`))));
+  }
+```
+
 ## [0.13.0]
 - :x: disabled auto-split arguments in selector function
 
