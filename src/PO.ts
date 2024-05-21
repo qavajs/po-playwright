@@ -25,11 +25,17 @@ class PO {
     private driver: Page | null = null;
     private config: { timeout?: number } = {};
     private logger: Logger = defaultLogger;
+    private waitForLoadState: boolean = false;
 
-    public init(driver: Page, options: { timeout: number, logger?: Logger } = { timeout: 2000 }) {
+    public init(driver: Page, options: {
+        timeout: number,
+        logger?: Logger,
+        waitForLoadState: boolean
+    } = { timeout: 2000, waitForLoadState: false }) {
         this.driver = driver;
         this.config.timeout = options.timeout;
         this.logger = options.logger ?? defaultLogger;
+        this.waitForLoadState = options.waitForLoadState;
     }
 
     /**
@@ -43,7 +49,7 @@ class PO {
         const tokens: Array<Token> = parseTokens(alias);
         let element: Locatable = this.driver;
         let po: PO | PageObject = this;
-        if (this.driver.waitForLoadState) {
+        if (this.waitForLoadState && this.driver.waitForLoadState) {
             await this.driver.waitForLoadState();
         }
         while (tokens.length > 0) {
