@@ -8,6 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 :beetle: - bugfix
 :x: - deprecation
 
+## [0.15.0]
+- :rocket: made waitForLoad state in getElement disabled by default
+
 ## [0.14.0]
 - :rocket: added capability to pass parent element to NativeSelector
 ```javascript
