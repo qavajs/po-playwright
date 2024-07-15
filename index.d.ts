@@ -8,9 +8,11 @@ declare interface Logger {
 declare function $(selector: string | Object, options?: SelectorOptions): Object;
 declare function $$(selector: string | Object, options?: SelectorOptions): Object;
 declare type PageObject = {
-    init(driver, options: { timeout: number, logger?: Logger }): void;
+    driver: Page;
+    init(driver, options: { timeout?: number, logger?: Logger }): void;
     register(pageObject: Object): void;
-    getElement(path: string): Locator
+    getElement(path: string): Locator;
+    setDriver(page: Page): void;
 }
 declare let po: PageObject;
 declare class Component {
