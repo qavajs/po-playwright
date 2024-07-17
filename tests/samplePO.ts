@@ -10,6 +10,7 @@ class SingleComponent {
     selector = '.container';
 
     ChildItem = $('.child-item');
+    UniqDeepElement = $('.child-item');
     IgnoreHierarchyItem = $('.list-components > li:first-child', { ignoreHierarchy: true });
 }
 

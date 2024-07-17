@@ -22,26 +22,26 @@ const defaultLogger: Logger = {
 
 class PO {
 
-    private driver: Page | null = null;
+    public driver: Page | null = null;
     private config: { timeout?: number } = {};
     private logger: Logger = defaultLogger;
     private waitForLoadState: boolean = false;
 
     public init(driver: Page, options: {
-        timeout: number,
+        timeout?: number,
         logger?: Logger,
-        waitForLoadState: boolean
+        waitForLoadState?: boolean
     } = { timeout: 2000, waitForLoadState: false }) {
         this.driver = driver;
-        this.config.timeout = options.timeout;
+        this.config.timeout = options.timeout ?? 2000;
         this.logger = options.logger ?? defaultLogger;
-        this.waitForLoadState = options.waitForLoadState;
+        this.waitForLoadState = options.waitForLoadState ?? false;
     }
 
     /**
      * Get element from page object
      * @public
-     * @param {string} alias
+     * @param {string} alias - element to locate
      * @returns {Locator}
      */
     public async getElement(alias: string): Promise<ExtendedLocator> {
@@ -61,12 +61,24 @@ class PO {
         return extendedElement
     }
 
-    public register(obj: Object) {
-        for (const prop in obj) {
+    /**
+     * Register page object map
+     * @param {Object} pageObject - page object to register
+     */
+    public register(pageObject: Object) {
+        for (const prop in pageObject) {
             // @ts-ignore
-            this[prop] = obj[prop]
+            this[prop] = pageObject[prop]
         }
     };
+
+    /**
+     * Set page instance
+     * @param {Page} page - page
+     */
+    public setDriver(page: Page) {
+        this.driver = page;
+    }
 
     /**
      * Get element by provided page object and token
@@ -76,14 +88,14 @@ class PO {
      * @param {Token} token
      * @returns
      */
-    private async getEl(element: Page | Locator, po: {[prop: string]: any}, token: Token): Promise<[Locatable, Object] | undefined> {
+    private async getEl(element: Locatable, po: {[prop: string]: any}, token: Token): Promise<[Locatable, Object] | undefined> {
         const elementName: string = token.elementName.replace(/\s/g, '');
         const newPo: Definition = po[elementName];
         if (!newPo) throw new Error(`${token.elementName} is not found`);
         const currentElement = (newPo.ignoreHierarchy ? this.driver : element) as Locatable;
         if (newPo.isNativeSelector) return [await (newPo.selectorFunction as Function)(this.driver, currentElement), newPo];
-        if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation. ${token.elementName} is not collection`);
-        if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation. ${token.elementName} selector property is required as it is collection`);
+        if (!newPo.isCollection && token.suffix) throw new Error(`Unsupported operation.\n${token.elementName} is not collection`);
+        if (newPo.isCollection && !newPo.selector) throw new Error(`Unsupported operation.\n${token.elementName} selector property is required as it is collection`);
         if (!newPo.selector) return [currentElement, newPo];
         newPo.resolvedSelector = this.resolveSelector(newPo.selector, token.param);
         this.logger.log(`${elementName} -> ${newPo.resolvedSelector}`);

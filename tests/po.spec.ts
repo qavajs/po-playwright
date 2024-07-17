@@ -146,7 +146,7 @@ test('get element from collection from component without selector', async () => 
 
 test('throw an error if component without selector registered as collection', async () => {
     const shouldThrow = async () => await po.getElement('#1 of Components Without Selector > #2 of List');
-    await expect(shouldThrow).rejects.toThrow('Unsupported operation. Components Without Selector selector property is required as it is collection');
+    await expect(shouldThrow).rejects.toThrow('Unsupported operation.\nComponents Without Selector selector property is required as it is collection');
 });
 
 test('get element by parametrised selector', async () => {
