@@ -12,7 +12,7 @@ export interface Definition {
 }
 
 /**
- * register element in page object
+ * Register element in page object
  * @param {string|object} definition
  * @param {boolean} isCollection
  * @param {DefinitionOptions} options
@@ -38,10 +38,29 @@ export function register(
     }
 }
 
+/**
+ * Define element or component
+ * @param {string | Object} definition - selector
+ * @param {DefinitionOptions} options - additional options
+ * @example
+ * class App {
+ *     Element = $('#element');
+ *     Panel = $(new Panel('#panel'));
+ * }
+ */
 export function $(definition: string | Object, options?: DefinitionOptions): Definition {
     return register(definition, false, options)
 }
-
+/**
+ * Define collection
+ * @param {string | Object} definition - selector
+ * @param {DefinitionOptions} options - additional options
+ * @example
+ * class App {
+ *     Collection = $$('#collection');
+ *     Panels = $$(new Panel('#panel'));
+ * }
+ */
 export function $$(definition: string | Object, options?: DefinitionOptions): Definition {
     return register(definition, true, options)
 }
