@@ -15,7 +15,7 @@ declare interface Logger {
  *     Panel = $(new Panel('#panel'));
  * }
  */
-declare function $(selector: string | Object, options?: SelectorOptions): Object;
+export declare function $(selector: string | Object, options?: SelectorOptions): Object;
 /**
  * Define collection
  * @param {string | Object} selector - selector
@@ -26,7 +26,7 @@ declare function $(selector: string | Object, options?: SelectorOptions): Object
  *     Panels = $$(new Panel('#panel'));
  * }
  */
-declare function $$(selector: string | Object, options?: SelectorOptions): Object;
+export declare function $$(selector: string | Object, options?: SelectorOptions): Object;
 declare type PageObject = {
     /**
      * driver instance
@@ -65,8 +65,9 @@ declare type PageObject = {
 }
 /**
  * Instance of page object
+ * @type {PageObject}
  */
-declare let po: PageObject;
+export declare let po: PageObject;
 /**
  * Component class
  * @example
@@ -77,7 +78,7 @@ declare let po: PageObject;
  *     Panel = $(new Panel('#panel'));
  * }
  */
-declare class Component {
+export declare class Component {
     constructor(selector?: any)
 }
 /**
@@ -90,7 +91,7 @@ declare class Component {
  *
  * When I click 'Dynamic Element (3)'
  */
-declare function Selector(selectorFunction: (arg: string) => string | Object): any
+export declare function Selector(selectorFunction: (arg: string) => string | Object): any
 /**
  * Function to obtain element in framework native way
  * @param {selectorFunction: (page: Page, parent: Locator) => Locator} selectorFunction
@@ -101,7 +102,4 @@ declare function Selector(selectorFunction: (arg: string) => string | Object): a
  *
  * When I click 'NativeElement'
  */
-declare function NativeSelector(selectorFunction: (page: Page, parent: Locator) => Locator): any
-declare module '@qavajs/po-playwright' {
-    export { $, $$, po, Component, Selector, NativeSelector }
-}
+export declare function NativeSelector(selectorFunction: (page: Page, parent: Locator) => Locator): any
