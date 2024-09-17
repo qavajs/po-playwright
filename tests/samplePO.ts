@@ -59,6 +59,7 @@ class App {
     MultipleComponents = $$(new MultipleComponent('.list-components li'));
     AsyncComponent = $(new AsyncComponent('#async-list-components'));
     AsyncComponentBySelector = $(new AsyncComponent(Selector((selector: any) => selector)));
+    AsyncComponentByNativeSelector = $(new AsyncComponent(NativeSelector(page => page.locator('#async-list-components'))));
     Level1Elements = $(new Level1Elements());
     NotExistingComponent = $(new NotExistingComponent());
     ComponentWithoutSelector = $(new ComponentWithoutSelector());
