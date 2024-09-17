@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/po-playwright",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "library for plain-english access to page object",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.14.10",
-    "@vitest/coverage-v8": "^2.0.2",
-    "playwright": "^1.45.1",
-    "typescript": "^5.5.3",
-    "vitest": "^2.0.2"
+    "@types/node": "^22.5.5",
+    "@vitest/coverage-v8": "^2.1.1",
+    "playwright": "^1.47.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
   }
 }

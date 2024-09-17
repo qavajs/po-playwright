@@ -159,6 +159,11 @@ test('get component by parametrised selector', async () => {
     expect(await element.innerText()).toEqual('async 2');
 });
 
+test('get component by native selector', async () => {
+    const element = await po.getElement('Async Component By Native Selector > #2 of Child Items');
+    expect(await element.innerText()).toEqual('async 2');
+});
+
 test('get collection by parametrised selector', async () => {
     const element = await po.getElement('Parametrized List (odd)');
     expect(await element.count()).toEqual(3);

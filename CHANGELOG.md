@@ -8,6 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 :beetle: - bugfix
 :x: - deprecation
 
+## [0.16.1]
+- :beetle: fixed issue preventing using NativeSelector with components
+
 ## [0.16.0]
 - :rocket: added _setDriver_ method
 
