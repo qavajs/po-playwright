@@ -8,7 +8,7 @@ export class Token {
     suffix?: string;
     param?: string[];
 
-    constructor({ elementName, value, prefix, suffix }: { elementName: string, value?: string, prefix?: string, suffix?: string}) {
+    constructor({ elementName, value, prefix, suffix }: { elementName: string, value?: string, prefix?: string, suffix?: string }) {
         this.elementName = elementName;
         this.value = value;
         this.prefix = prefix;
@@ -17,9 +17,9 @@ export class Token {
             this.value = value.slice(0, value.length - 1);
         }
         if (elementName.includes('(')) {
-            const [name, param] = elementName.replace(')', '').split(/\s+\(/);
+            const [name, param] = elementName.split(/\s+\(/, 2);
             this.elementName = name;
-            this.param = [param.replace(/([()]|^\s)/g, '')];
+            this.param = [param.replace(/(\)$)/g, '')];
         }
     }
 }
@@ -32,7 +32,7 @@ export default function parseTokens(path: string): Array<Token> {
 function token(value: string): Token {
     if (PARSE_TOKEN_REGEXP.test(value)) {
         const { groups } = PARSE_TOKEN_REGEXP.exec(value) as { groups: Object };
-        return new Token(groups as { elementName: string, value?: string, prefix?: string, suffix?: string})
+        return new Token(groups as { elementName: string, value?: string, prefix?: string, suffix?: string })
     }
     return new Token({ elementName: value })
 }

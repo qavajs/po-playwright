@@ -1,6 +1,6 @@
 ## @qavajs/po-playwright
 
-This library provides the ability to create hierarchical page objects and access elements using plain-english selectors.
+@qavajs library provides the ability to create hierarchical page objects and access elements using plain-english selectors.
 Works on top of Playwright.
 
 `npm install @qavajs/po-playwright`
