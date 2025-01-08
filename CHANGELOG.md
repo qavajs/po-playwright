@@ -8,6 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 :beetle: - bugfix
 :x: - deprecation
 
+## [1.0.0]
+- :beetle: fixed parameter parser to support parenthesis
+
 ## [0.16.1]
 - :beetle: fixed issue preventing using NativeSelector with components
 

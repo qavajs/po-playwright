@@ -184,6 +184,11 @@ test('native element from parent', async () => {
     expect(await element.innerText()).toBe('I am in iframe');
 });
 
+test('parenthesis in parameter', async () => {
+    const element = await po.getElement('Async Component By Selector (#async-list-components li:nth-child(1))');
+    expect(await element.innerText()).toEqual('async 1');
+});
+
 afterAll(async () => {
     await browser.close();
 });
